@@ -9,6 +9,7 @@ end
 require "json"
 require "cosmo/http_server/handler"
 require "cosmo/http_server/health"
+require "cosmo/http_server/ping"
 
 module Cosmo
   # WEBrick server running the Rack app in a background thread.
@@ -20,6 +21,7 @@ module Cosmo
     def self.app
       Rack::Builder.app do
         use Health
+        use Ping
         run ->(_env) { NOT_FOUND }
       end
     end
